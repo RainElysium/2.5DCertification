@@ -3002,6 +3002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6131596825994824663}
   - component: {fileID: 8110642234310979570}
+  - component: {fileID: 6426816371962505051}
   m_Layer: 0
   m_Name: Moving_Platform
   m_TagString: Untagged
@@ -3047,6 +3048,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waypointAGob: {fileID: 3007957407478890982}
   _waypointBGob: {fileID: 3007957407485980972}
+--- !u!65 &6426816371962505051
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007957408197094644}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.833031, y: 0.7971926, z: 27.086311}
+  m_Center: {x: -6.548235, y: -2.6160035, z: -2.8545036}
 --- !u!1 &3075292921610707431
 GameObject:
   m_ObjectHideFlags: 0

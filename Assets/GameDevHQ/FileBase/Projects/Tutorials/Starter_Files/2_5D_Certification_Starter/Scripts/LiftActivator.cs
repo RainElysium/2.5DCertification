@@ -19,12 +19,22 @@ public class LiftActivator : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player hit");
-
             if (CompareTag("Lift_Activator_Top"))
             {
-                var _player = GameObject.Find("Player").GetComponent<Player>();
-                _player.transform.parent = _lift.transform;
+                other.transform.parent = _lift.transform;
+                _activateLift = true;
+            }
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (CompareTag("Lift_Activator_Top"))
+            {
+                other.transform.parent = null;
                 _activateLift = true;
             }
 

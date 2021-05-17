@@ -8,6 +8,7 @@ public class MovingPlatform : MonoBehaviour
     private GameObject _waypointAGob, _waypointBGob;
     private Vector3 _waypointA, _waypointB;
     private int _waypointNumber = 1;
+    private CharacterController _controller;
 
     private float _speed = 5.0f;
     // Start is called before the first frame update
@@ -21,7 +22,7 @@ public class MovingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (transform.position == _waypointA)
             _waypointNumber = 1;
@@ -32,7 +33,26 @@ public class MovingPlatform : MonoBehaviour
 
         if (_waypointNumber == 1)
             transform.position = Vector3.MoveTowards(transform.position, _waypointB, _speed * Time.deltaTime);
-       else if (_waypointNumber == 2)
+        else if (_waypointNumber == 2)
             transform.position = Vector3.MoveTowards(transform.position, _waypointA, _speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collided!");
+        if (other.CompareTag("Player"))
+        {
+            _controller = other.GetComponent<CharacterController>();
+            other.transform.parent = this.transform;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.transform.parent = null;
+        }
+
     }
 }
