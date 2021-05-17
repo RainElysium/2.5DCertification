@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ledge
   - Ledge_Grab_Checker
+  - Lift_Activator_Top
   layers:
   - Default
   - TransparentFX
