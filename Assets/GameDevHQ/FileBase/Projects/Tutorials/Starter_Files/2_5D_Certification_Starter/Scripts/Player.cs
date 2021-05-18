@@ -7,15 +7,18 @@ public class Player : MonoBehaviour
     private CharacterController _controller;
     [SerializeField]
     private float _speed = 5.0f;
+    private float _climbSpeed = 2.0f;
     [SerializeField]
     private float _jumpHeight = 15f;
     [SerializeField]
     private float _gravity = 0.5f;
     [SerializeField]
-    private Vector3 _direction, _velocity;
+    private Vector3 _direction, _velocity, _ladderPOS;
     private float _yVelocity;
     private Animator _anim;
     private bool _jumping = false;
+    [SerializeField]
+    private bool _climbLadder = false;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +40,17 @@ public class Player : MonoBehaviour
         if (_anim.GetBool("LedgeGrab"))
             if (Input.GetKeyDown(KeyCode.E))
                 _anim.SetTrigger("ClimbUp");
+
+        if (_climbLadder)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + 4.23f, transform.position.z), _climbSpeed * Time.deltaTime);
+
+            if (transform.position.y >= _ladderPOS.y + 8.86f)
+            {
+                _climbLadder = false;
+                _anim.SetBool("ReachedTopOfLadder", true);
+            }
+        }
 
     }
     void CalculateMovement()
@@ -84,6 +98,19 @@ public class Player : MonoBehaviour
         _controller.enabled = false;
     }
 
+    public void GrabLadder(Vector3 handPos)
+    {
+        transform.position = handPos;
+        _ladderPOS = handPos;
+
+        _anim.SetTrigger("ClimbLadder");
+        _anim.SetFloat("Speed", 0.0f);
+        _anim.SetBool("Jumping", false);
+        _controller.enabled = false;
+
+        _climbLadder = true;
+    }
+
 
     public void StandUp()
     {
@@ -92,7 +119,14 @@ public class Player : MonoBehaviour
         if (playerPosition == null)
             Debug.Log("No position found");
 
-        transform.position = new Vector3(playerPosition.x, playerPosition.y + 8.31f, playerPosition.z);
+        if (_climbLadder)
+        {
+            transform.position = new Vector3(playerPosition.x, playerPosition.y + 8.89f, playerPosition.z + 1.0f);
+            _climbLadder = false;
+        }
+        else
+            transform.position = new Vector3(playerPosition.x, playerPosition.y + 8.31f, playerPosition.z);
+        
         _controller.enabled = true;
     }
 }

@@ -6,6 +6,7 @@ public class MovingPlatform : MonoBehaviour
 {
     [SerializeField]
     private GameObject _waypointAGob, _waypointBGob;
+    [SerializeField]
     private Vector3 _waypointA, _waypointB;
     private int _waypointNumber = 1;
     private CharacterController _controller;
@@ -41,18 +42,13 @@ public class MovingPlatform : MonoBehaviour
     {
         Debug.Log("Collided!");
         if (other.CompareTag("Player"))
-        {
-            _controller = other.GetComponent<CharacterController>();
             other.transform.parent = this.transform;
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
-        {
             other.transform.parent = null;
-        }
 
     }
 }

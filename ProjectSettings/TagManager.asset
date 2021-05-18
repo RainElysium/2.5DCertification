@@ -7,6 +7,8 @@ TagManager:
   - Ledge
   - Ledge_Grab_Checker
   - Lift_Activator_Top
+  - Ladder_Grab_Checker
+  - Moving_Platform
   layers:
   - Default
   - TransparentFX
