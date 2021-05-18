@@ -41,6 +41,9 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
                 _anim.SetTrigger("ClimbUp");
 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            _anim.SetTrigger("Roll");
+
         if (_climbLadder)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + 4.23f, transform.position.z), _climbSpeed * Time.deltaTime);
@@ -114,6 +117,9 @@ public class Player : MonoBehaviour
 
     public void StandUp()
     {
+        if (_anim.GetBool("LedgeGrab"))
+            _anim.SetBool("LedgeGrab", false);
+
         var playerPosition = transform.position;
 
         if (playerPosition == null)

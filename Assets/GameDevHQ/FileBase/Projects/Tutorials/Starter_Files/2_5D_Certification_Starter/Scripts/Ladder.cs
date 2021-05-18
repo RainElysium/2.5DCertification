@@ -15,7 +15,7 @@ public class Ladder : MonoBehaviour
     {
         if (other.CompareTag("Ladder_Grab_Checker"))
         {
-            _collisionPoint = new Vector3(0f, 43.11f, 43.84f);
+            _collisionPoint = new Vector3(0f, 44.11f, 43.84f);
             var player = other.GetComponentInParent<Player>();
 
             //if (player.transform.parent != null)
